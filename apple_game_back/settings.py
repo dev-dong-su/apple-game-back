@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 import dj_database_url
+import django_heroku
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -33,6 +34,7 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
 
+django_heroku.settings(locals())
 # Application definition
 
 INSTALLED_APPS = [
