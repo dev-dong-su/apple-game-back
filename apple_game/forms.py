@@ -9,3 +9,6 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'best_score')
+
+    def clean_password2(self):
+        return None
