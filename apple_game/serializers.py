@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import User
+from .models import SaladLab
 
-class UserSerializer(serializers.ModelSerializer):
+
+class SaladLabSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = SaladLab
         fields = ['username', 'best_score', 'created_at']
-    
