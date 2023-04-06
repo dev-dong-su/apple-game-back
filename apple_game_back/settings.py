@@ -66,6 +66,7 @@ ROOT_URLCONF = 'apple_game_back.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:4200",
+    "https://apple-game-w7np-2jbak6nmk-dev-dong-su.vercel.app",
 ]
 
 TEMPLATES = [
