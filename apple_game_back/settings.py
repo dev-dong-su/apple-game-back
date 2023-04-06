@@ -34,7 +34,6 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
 
-django_heroku.settings(locals())
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,6 +61,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+
+django_heroku.settings(locals())
 
 ROOT_URLCONF = 'apple_game_back.urls'
 
