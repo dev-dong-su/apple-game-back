@@ -1,1 +1,1 @@
-web: gunicorn apple_game_bak.wsgi --log-file -
+web: gunicorn apple_game_back.wsgi --log-file -
