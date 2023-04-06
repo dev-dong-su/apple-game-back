@@ -30,7 +30,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-DEBUG = os.getenv('DEBUG') == 'True'
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com']
 

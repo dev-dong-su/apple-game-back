@@ -3,7 +3,9 @@ from .models import User
 from django import forms
 
 class CustomUserCreationForm(UserCreationForm):
-
+    password1 = None
+    password2 = None
+    
     class Meta:
         model = User
         fields = ('username', 'best_score')
