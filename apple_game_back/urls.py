@@ -15,13 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from apple_game.views import UserCreateAPIView, UserUpdateAPIView, UsersListAPIView, CheckJWTokenAPIView
+from apple_game.views import EndGameAPIView, StartGameAPIView, SaladLabCreateAPIView, SaladLabUpdateAPIView, SaladLabListAPIView, CheckJWTokenAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
-    path('user/all/', UsersListAPIView.as_view(), name='user-list'),
-    path('user/add/', UserCreateAPIView.as_view(), name='user_add'),
-    path('user/update/', UserUpdateAPIView.as_view(), name='user_update'),
-    path('user/user_token/', CheckJWTokenAPIView.as_view(), name="user_token")
+
+    path('user/all/', SaladLabListAPIView.as_view(), name='user-list'),
+    path('user/add/', SaladLabCreateAPIView.as_view(), name='user_add'),
+    path('user/update/', SaladLabUpdateAPIView.as_view(), name='user_update'),
+    path('user/user_token/', CheckJWTokenAPIView.as_view(), name="user_token"),
+
+    path("game/start/", StartGameAPIView.as_view(), name="start_game"),
+    path("game/end/", EndGameAPIView.as_view(), name='end_game')
 ]
