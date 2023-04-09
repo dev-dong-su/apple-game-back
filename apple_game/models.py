@@ -22,3 +22,6 @@ class GameSession(models.Model):
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.id
