@@ -13,7 +13,7 @@ from rest_framework.authentication import get_authorization_header
 
 
 from .models import GameSession, SaladLab
-from .serializers import SaladLabSerializer
+from .serializers import SaladLabSerializer, GameSessionSerializer
 
 
 class TokenAuthentication(BasePermission):
@@ -103,6 +103,7 @@ class SaladLabListAPIView(ListAPIView):
 
 
 class StartGameAPIView(APIView):
+    serializer_class = GameSessionSerializer
     permission_classes = [TokenAuthentication]
 
     def post(self, request, *args, **kwargs):
@@ -115,10 +116,12 @@ class StartGameAPIView(APIView):
         user = get_object_or_404(SaladLab, username=username)
         game_session = start_game(user)
 
-        return Response({"message": "게임 시작!", "session_id": game_session.id}, status=status.HTTP_200_OK)
+        serializer = self.serializer_class(game_session)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class EndGameAPIView(APIView):
+    serializer_class = GameSessionSerializer
     permission_classes = [TokenAuthentication]
 
     def post(self, request, *args, **kwargs):
@@ -140,7 +143,8 @@ class EndGameAPIView(APIView):
 
         end_game(game_session, new_score)
 
-        return Response({"message": "게임 종료! 업데이트 완료!"}, status=status.HTTP_200_OK)
+        serializer = self.serializer_class(game_session)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 def start_game(user):
