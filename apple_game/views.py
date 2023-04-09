@@ -26,7 +26,8 @@ class TokenAuthentication(BasePermission):
 
         try:
             token = auth_header[1]
-            decoded_token = jwt.decode(token, 'dongsu', algorithms='HS256')
+            decoded_token = jwt.decode(token, os.getenv(
+                'SECRET_KEY'), algorithms='HS256')
 
         except jwt.InvalidTokenError:
             raise AuthenticationFailed({"message": "토큰이 올바르지 않습니다!"})
