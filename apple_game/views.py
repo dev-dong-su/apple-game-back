@@ -42,7 +42,7 @@ class CheckJWTokenAPIView(APIView):
         return Response({"message": "토큰을 검사합니다!"})
 
 
-class SaladlabCreateAPIView(APIView):
+class SaladLabCreateAPIView(APIView):
     serializer_class = SaladLabSerializer
 
     def post(self, request, *args, **kwargs):
@@ -69,7 +69,7 @@ class SaladlabCreateAPIView(APIView):
         return Response({"message": "토큰이 올바르지 않습니다!", 'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SaladlabUpdateAPIView(APIView):
+class SaladLabUpdateAPIView(APIView):
     serializer_class = SaladLabSerializer
     permission_classes = [TokenAuthentication]
 
@@ -98,7 +98,7 @@ class SaladlabUpdateAPIView(APIView):
         return Response({"message": "유저 정보를 업데이트 하는데 실패 했습니다!", 'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SaladlabListAPIView(ListAPIView):
+class SaladLabListAPIView(ListAPIView):
     queryset = SaladLab.objects.filter(best_score__isnull=False)
     serializer_class = SaladLabSerializer
 
