@@ -19,6 +19,6 @@ class GameSession(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(SaladLab, on_delete=models.CASCADE)
     score = models.IntegerField(null=True)
-    start_time = models.DateTimeField(default=timezone.now)
+    start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
     is_completed = models.BooleanField(default=False)
