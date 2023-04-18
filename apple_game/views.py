@@ -13,8 +13,8 @@ from rest_framework.authentication import get_authorization_header
 from dateutil.parser import parse
 
 
-from .models import GameSession, Saladlab
-from .serializers import SaladlabSerializer
+from .models import GameSession, SaladLab
+from .serializers import SaladLabSerializer
 
 
 class TokenAuthentication(BasePermission):
@@ -43,13 +43,13 @@ class CheckJWTokenAPIView(APIView):
 
 
 class SaladlabCreateAPIView(APIView):
-    serializer_class = SaladlabSerializer
+    serializer_class = SaladLabSerializer
 
     def post(self, request, *args, **kwargs):
         update_data = request.data
         username = update_data.get('username')
 
-        existing_user = Saladlab.objects.filter(username=username).first()
+        existing_user = SaladLab.objects.filter(username=username).first()
         if existing_user:
             try:
                 access_token = jwt.encode(
@@ -70,7 +70,7 @@ class SaladlabCreateAPIView(APIView):
 
 
 class SaladlabUpdateAPIView(APIView):
-    serializer_class = SaladlabSerializer
+    serializer_class = SaladLabSerializer
     permission_classes = [TokenAuthentication]
 
     def put(self, request, *args, **kwargs):
@@ -78,7 +78,7 @@ class SaladlabUpdateAPIView(APIView):
         username = update_data.get('username')
         best_score = update_data.get('best_score')
         new_name = update_data.get('new_name', None)
-        user = get_object_or_404(Saladlab, username=username)
+        user = get_object_or_404(SaladLab, username=username)
 
         if best_score != user.best_score:
             return Response({"message": "유저가 존재하지 않습니다.", 'error': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
@@ -99,8 +99,8 @@ class SaladlabUpdateAPIView(APIView):
 
 
 class SaladlabListAPIView(ListAPIView):
-    queryset = Saladlab.objects.filter(best_score__isnull=False)
-    serializer_class = SaladlabSerializer
+    queryset = SaladLab.objects.filter(best_score__isnull=False)
+    serializer_class = SaladLabSerializer
 
 
 class StartGameAPIView(APIView):
@@ -112,7 +112,7 @@ class StartGameAPIView(APIView):
         decoded_token = jwt.decode(token, 'dongsu', algorithms='HS256')
         username = decoded_token['username']
 
-        user = get_object_or_404(Saladlab, username=username)
+        user = get_object_or_404(SaladLab, username=username)
         game_session = start_game(user)
 
         return Response({"message": "게임 시작!", "session_id": game_session.id}, status=status.HTTP_200_OK)
@@ -127,7 +127,7 @@ class EndGameAPIView(APIView):
         decoded_token = jwt.decode(token, 'dongsu', algorithms='HS256')
         username = decoded_token['username']
 
-        user = get_object_or_404(Saladlab, username=username)
+        user = get_object_or_404(SaladLab, username=username)
         session_id = request.data.get('session_id')
         new_score = request.data.get('new_score')
 
