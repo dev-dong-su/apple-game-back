@@ -93,15 +93,15 @@ WSGI_APPLICATION = 'apple_game_back.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'apple_game',
-        'USER': 'k__.h__.s_',
-        'PASSWORD': 'rlagmltn12@',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'apple_game',
+    #     'USER': 'k__.h__.s_',
+    #     'PASSWORD': 'rlagmltn12@',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # }
 }
 
 db_from_env = dj_database_url.config(conn_max_age=500)
